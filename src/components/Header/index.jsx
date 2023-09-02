@@ -3,9 +3,9 @@ import "./style.scss";
 import { Button } from "flowbite-react";
 const index = () => {
     return (
-        <header className="shadow-md">
+        <header className="shadow-md fixed top-0 left-0 z-50 bg-[rgba(255, 255, 255, .6)] backdrop-blur-[10px] w-full">
             <div>
-                <nav className="flex justify-between items-center py-[5px] px-5">
+                <nav className="flex justify-between items-center py-[5px] px-5 h-[51px]">
                     <a href="#">
                         <svg width="84" height="17" viewBox="0 0 84 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_1_114)">
@@ -20,7 +20,7 @@ const index = () => {
                             </defs>
                         </svg>
                     </a>
-                    <Button className="bg-[#5B41F5] enabled:hover:bg-[#5B41F5]">Join</Button>
+                    <Button className="bg-[#5B41F5] enabled:hover:bg-[#5B41F5]">Войти</Button>
                 </nav>
                 
             </div>
