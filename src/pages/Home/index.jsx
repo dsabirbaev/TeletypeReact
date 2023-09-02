@@ -1,4 +1,5 @@
 
+import {Link} from "react-router-dom";
 
 import "./style.scss"
 
@@ -18,7 +19,7 @@ const index = () => {
                     <h1 className="mb-2 font-bold text-[96px] text-[#1A1919] dark:text-white text-center w-[1200px]">Монетизируйте свой контент на Teletype</h1>
 
                     <p className="font-medium text-center mx-auto text-[32px] text-[#1A1919] dark:text-white w-[1100px] mb-16">Teletype — это готовый набор инструментов, позволяющий публиковать и монетизировать ваши заметки, посты, видео, фотографии, подкасты и песни.</p>
-                    <a className="bg-[#5B41F5] font-semibold px-8 py-6 rounded-[16px] text-[15px] text-white">Создать блог в Teletype</a>
+                    <Link to="auth/login" className="bg-[#5B41F5] font-semibold px-8 py-6 rounded-[16px] text-[15px] text-white">Создать блог в Teletype</Link>
                 </div> 
 
             </div>

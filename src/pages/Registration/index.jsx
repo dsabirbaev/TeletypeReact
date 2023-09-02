@@ -1,15 +1,17 @@
 
 
+
+
 import "./style.scss";
 
 const index = () => {
     return (
-
         <div className="flex items-center justify-center flex-col">
             <form className="flex flex-col items-center mb-8 w-full">
-                <input type="email" placeholder="Email" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
-                <input type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
-                <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button>
+                <input type="text" placeholder="John Doe" autoComplete="name" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                <input type="email" placeholder="Email" autoComplete="email" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                <input type="password" placeholder="Пароль" autoComplete="current-password" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Зарегистрироваться</button>
             </form>
             <div className="flex justify-center items-center gap-x-3 mb-8">
                 <span className="w-8 h-8 rounded-full bg-[#2F4694] flex items-center justify-center">

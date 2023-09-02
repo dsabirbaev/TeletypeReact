@@ -9,6 +9,9 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import NotFound from "../pages/NotFound";
 
+import Auth from "../pages/Auth";
+import Login from "../pages/Login";
+import Registration from "../pages/Registration";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +28,24 @@ const router = createBrowserRouter([
                 element: <About/>
             }
         ]
-    }
+    },
+    {
+        path: "/auth",
+        element: <Auth/>,
+        children: [
+            {
+                path: "login",
+                element: <Login/>,
+               
+            },
+            {
+                path: "registration",
+                element: <Registration/>,
+            }
+        ]
+    },
+    
+   
 ]);
 
 export default router;

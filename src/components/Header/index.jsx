@@ -42,7 +42,7 @@ const index = () => {
                             }
                         </div>
 
-                        <a className="bg-[#5B41F5] text-white text-[13px] py-[8px] px-[10px] rounded-[7px] font-semibold">Войти</a>
+                        <Link to="auth/login" className="bg-[#5B41F5] text-white text-[13px] py-[8px] px-[10px] rounded-[7px] font-semibold">Войти</Link>
                     </div>
 
                 </nav>
