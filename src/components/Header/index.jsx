@@ -2,8 +2,12 @@
 import { useState } from "react";
 import "./style.scss";
 import { Link } from "react-router-dom";
+
+import user from "../../assets/images/user.png";
 const index = () => {
     const [dark, setDark] = useState(false);
+   
+    const isAuth = localStorage.getItem("token");
 
     function toggleDarkMode() {
         setDark(!dark);
@@ -32,7 +36,7 @@ const index = () => {
                         <div onClick={toggleDarkMode}>
                             {
                                 dark ?
-                                    <svg className="w-5 h-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z" />
                                     </svg> :
 
@@ -41,8 +45,26 @@ const index = () => {
                                     </svg>
                             }
                         </div>
+                        {
+                            isAuth ?
+                                <div className="flex items-center gap-x-5 ">
+                                    <span>
+                                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg>
+                                    </span>
+                                    <span className="block h-[40px] w-[2px] bg-[#e0e0e0]"></span>
+                                    <div className="flex items-center gap-x-3">
+                                        <img src={user} alt="pic" className="w-6 h-6 bg-lime-500 rounded-full" />
+                                        <p className="text-[13px] font-semibold text-[#1A1919]">{localStorage.getItem("username")}</p>
+                                    </div>
+                                </div>
+                                :
+                                <Link to="auth/login" className="bg-[#5B41F5] text-white text-[13px] py-[8px] px-[10px] rounded-[7px] font-semibold">Войти</Link>
 
-                        <Link to="auth/login" className="bg-[#5B41F5] text-white text-[13px] py-[8px] px-[10px] rounded-[7px] font-semibold">Войти</Link>
+                        }
+
+
                     </div>
 
                 </nav>

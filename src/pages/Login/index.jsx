@@ -1,14 +1,38 @@
 
-
+import { useState } from "react";
 import "./style.scss";
-
+import blogAPI from "../../service/blog";
+import {useNavigate} from "react-router-dom";
 const index = () => {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const login = async() => {
+        const loginValue = {
+            username: email,
+            password: password
+        }
+
+        try{
+            const response = await blogAPI.login(loginValue);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("username", response.data?.user?.full_name);
+            navigate(-1);
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+    function onSubmit(e){
+        e.preventDefault();
+        login();
+    }
     return (
 
         <div className="flex items-center justify-center flex-col">
-            <form className="flex flex-col items-center mb-8 w-full">
-                <input type="email" placeholder="Email" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
-                <input type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
+            <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
+                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button>
             </form>
             <div className="flex justify-center items-center gap-x-3 mb-8">
