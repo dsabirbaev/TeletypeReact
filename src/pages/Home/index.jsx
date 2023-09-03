@@ -7,8 +7,10 @@ import "./style.scss"
 import blogAPI from "../../service/blog";
 const index = () => {
     const isAuth = localStorage.getItem("token");
+    
     const { blogs, loading } = useSelector((data) => data);
     const dispatch = useDispatch();
+
     const getBlogs = async () => {
         try {
             const response = await blogAPI.blogs();
@@ -24,7 +26,7 @@ const index = () => {
 
     useEffect(() => {
         getBlogs();
-    })
+    }, [])
 
     return (
         <section className="pt-[150px]">

@@ -32,7 +32,7 @@ const index = () => {
                 </span>
             </div>
 
-            <a href="#" className="mb-2 text-[#949494] hover:text-black duration-200 text-[13px] font-semibold px-[25px] py-[8px] hover:bg-[#ebe8e8]">Восстановить пароль</a>
+           
             <p className="text-[13px] text-[#949494] text-center">Нажимая "Войти", я соглашаюсь с тем, что я прочитал и принял Пользовательское соглашение</p>
         </div>
     );
