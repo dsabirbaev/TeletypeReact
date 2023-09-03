@@ -48,11 +48,14 @@ const index = () => {
                         {
                             isAuth ?
                                 <div className="flex items-center gap-x-5 ">
-                                    <span>
-                                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                        </svg>
-                                    </span>
+                                    <Link to="/createblog">
+                                        <span>
+                                            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                            </svg>
+                                        </span>
+                                    </Link>
+
                                     <span className="block h-[40px] w-[2px] bg-[#e0e0e0]"></span>
                                     <div className="flex items-center gap-x-3">
                                         <img src={user} alt="pic" className="w-6 h-6 bg-lime-500 rounded-full" />

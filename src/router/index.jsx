@@ -7,6 +7,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../pages/Layout/Layout";
 import Home from "../pages/Home";
 import SingleBlog from "../pages/SingleBlog";
+import CreateBlog from "../pages/CreateBlog";
 import NotFound from "../pages/NotFound";
 
 import Auth from "../pages/Auth";
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "blog/:id",
                 element: <SingleBlog/>
+            },
+            {
+                path: "/createblog",
+                element: <CreateBlog/>
             }
         ]
     },
