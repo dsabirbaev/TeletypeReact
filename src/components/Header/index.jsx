@@ -56,7 +56,7 @@ const index = () => {
                                     <span className="block h-[40px] w-[2px] bg-[#e0e0e0]"></span>
                                     <div className="flex items-center gap-x-3">
                                         <img src={user} alt="pic" className="w-6 h-6 bg-lime-500 rounded-full" />
-                                        <p className="text-[13px] font-semibold text-[#1A1919]">{localStorage.getItem("username")}</p>
+                                        <p className="text-[13px] font-semibold text-[#1A1919] dark:text-white">{localStorage.getItem("username")}</p>
                                     </div>
                                 </div>
                                 :
