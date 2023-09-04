@@ -29,8 +29,11 @@ const index = () => {
         }
     }
 
+
+    document.title = `${blog?.title}`;
     useEffect(() => {
         getSingleBlog();
+        
     }, [])
     const date = new Date(blog?.createdAt);
     const monthNames = [

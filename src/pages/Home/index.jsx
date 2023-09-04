@@ -26,6 +26,7 @@ const index = () => {
 
     useEffect(() => {
         getBlogs();
+        document.title = "Teletype";
     }, [])
 
     return (
