@@ -18,6 +18,7 @@ const index = () => {
             const response = await blogAPI.login(loginValue);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", response.data?.user?.full_name);
+            localStorage.setItem("id", response.data?.id);
             navigate(-1);
         }catch(err){
             console.log(err.message);
