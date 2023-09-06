@@ -1,8 +1,17 @@
 
 import { Link } from "react-router-dom";
+
+import {useDispatch, useSelector} from "react-redux";
+import {SET_MODAL_WINDOW} from "../../../redux/action/actions";
+
 import "./style.scss";
+import CardModal from "../Modal/CardModal";
 
 const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
+
+    const {modalWindow} = useSelector(data => data);
+    const dispatch = useDispatch();
+    
     const date = new Date(createdAt);
     const monthNames = [
         "января",
@@ -18,7 +27,12 @@ const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
         "ноября",
         "декабря"
     ];
+
+   
+
     return (
+
+            
        
             <div className="p-5 border rounded-[16px] hover:border-gray-500 duration-200 w-[800px]">
                 <Link to={`blog/${id}`}> 
@@ -28,7 +42,11 @@ const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
                 <p className="text-[17px] text-[#1A1919] mb-5 dark:text-white">{body.length > 250 ? (<>{body.slice(0, 250)} <span className="font-bold"> ...</span> </>) : body}
 
                 </p>
-                <p className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
+               
+                <p onClick={() =>  dispatch(SET_MODAL_WINDOW())}  className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
+             
+                <CardModal/>
+
                 <p className="text-[#949494] flex items-center gap-x-4  dark:text-white">
                     <span>{`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}</span>
 

@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/UI/Card/Card";
+
 import { useDispatch, useSelector } from "react-redux";
 import { SET_BLOGS, SET_ERROR, SET_LOADER } from "../../redux/action/actions";
 import "./style.scss"
 import blogAPI from "../../service/blog";
 const index = () => {
     const isAuth = localStorage.getItem("token");
-    
+
     const { blogs, loading } = useSelector((data) => data);
     const dispatch = useDispatch();
 
@@ -29,6 +30,13 @@ const index = () => {
         document.title = "Teletype";
     }, [])
 
+    if (loading) {
+        return <div className="loader-blogs w-screen h-screen bg-white fixed z-40 top-0 left-0 flex items-center justify-center">
+            <svg viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+            </svg>
+        </div>
+    }
     return (
         <section className="pt-[150px]">
             <div className="container">
@@ -50,7 +58,7 @@ const index = () => {
                                 <Link to="auth/login" className="mb-8 bg-[#5B41F5] font-semibold px-8 py-6 rounded-[16px] text-[15px] text-white">Создать блог в Teletype</Link>
                             </div>
                     }
-
+                   
 
                     <div className="flex flex-col items-center gap-y-4  py-5 min-w-full">
                         {

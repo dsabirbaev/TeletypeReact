@@ -13,10 +13,18 @@ export const SET_ERROR = (data) => {
     return {type: "SET_ERROR", payload: data};
 }
 
+
 export const SET_SINGLE_BLOG = (data) => {
     return {type : "SET_SINGLE_BLOG", payload: data};
 }
 
+export const SET_LOADER_BLOG = () => {
+    return {type: "SET_LOADER_BLOG"};
+}
+
+export const SET_ERROR_BLOG = (data) => {
+    return {type: "SET_ERROR_BLOG", payload: data};
+}
 
 export const SET_LIKE = () => {
     return {type: "SET_LIKE"};
@@ -24,4 +32,9 @@ export const SET_LIKE = () => {
 
 export const SET_DISLIKE = () => {
     return {type: "SET_DISLIKE"};
+}
+
+
+export const SET_MODAL_WINDOW = () => {
+    return {type: "SET_MODAL_WINDOW"};
 }

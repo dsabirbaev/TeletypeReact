@@ -4,13 +4,13 @@ import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SET_SINGLE_BLOG, SET_ERROR, SET_LOADER, SET_LIKE, SET_DISLIKE } from "../../redux/action/actions";
-
+import { SET_SINGLE_BLOG, SET_ERROR_BLOG, SET_LOADER_BLOG, SET_LIKE, SET_DISLIKE } from "../../redux/action/actions";
+import "./style.scss";
 
 
 const index = () => {
 
-    const { blog, likeCount, dislikeCount } = useSelector((data) => data);
+    const { blog, likeCount, dislikeCount, loadingBlog } = useSelector((data) => data);
     const dispatch = useDispatch();
 
     const { id } = useParams();
@@ -21,11 +21,11 @@ const index = () => {
             const response = await blogAPI.singleBlog(id);
             if (response.status === 200) {
                 dispatch(SET_SINGLE_BLOG(response.data));
-                dispatch(SET_LOADER());
+                dispatch(SET_LOADER_BLOG());
             }
 
         } catch (err) {
-            dispatch(SET_ERROR(err.message));
+            dispatch(SET_ERROR_BLOG(err.message));
         }
     }
 
@@ -33,7 +33,7 @@ const index = () => {
     document.title = `${blog?.title}`;
     useEffect(() => {
         getSingleBlog();
-        
+
     }, [])
     const date = new Date(blog?.createdAt);
     const monthNames = [
@@ -50,6 +50,15 @@ const index = () => {
         "ноября",
         "декабря"
     ];
+
+    if (loadingBlog) {
+        return <div className="loader-single-blog w-screen h-screen bg-white fixed z-40 top-0 left-0 flex items-center justify-center">
+            <svg viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+            </svg>
+        </div>
+    }
+
     return (
         <section className='pt-[150px] pb-8 relative'>
             <Link to="/">
@@ -66,10 +75,10 @@ const index = () => {
 
                     <div className="flex items-center justify-between mb-5 text-[16px]">
                         <div>
-                            <h1 class="text-xl font-semibold dark:text-white mb-2">{blog?.user?.full_name}</h1>
-                            <h2 class="text-xl font-semibold text-gray-400">{blog?.user?.username}</h2>
+                            <h1 className="text-xl font-semibold dark:text-white mb-2">{blog?.user?.full_name}</h1>
+                            <h2 className="text-xl font-semibold text-gray-400">{blog?.user?.username}</h2>
                         </div>
-                        <button class="border-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:border-blue-400">Follow</button>
+                        <button className="border-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:border-blue-400">Follow</button>
 
                     </div>
                     <div className="flex items-center gap-x-4 mb-12 dark:text-white">
