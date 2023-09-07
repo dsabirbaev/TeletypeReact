@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { SET_SINGLE_BLOG, SET_ERROR_BLOG, SET_LOADER_BLOG, SET_LIKE, SET_DISLIKE } from "../../redux/action/actions";
+import { SET_SINGLE_BLOG, SET_ERROR_BLOG, SET_LOADER_BLOG_OFF, SET_LOADER_BLOG_ON, SET_LIKE, SET_DISLIKE } from "../../redux/action/actions";
 import "./style.scss";
 
 
@@ -17,11 +17,12 @@ const index = () => {
 
 
     const getSingleBlog = async () => {
+
         try {
             const response = await blogAPI.singleBlog(id);
             if (response.status === 200) {
                 dispatch(SET_SINGLE_BLOG(response.data));
-                dispatch(SET_LOADER_BLOG());
+                dispatch(SET_LOADER_BLOG_OFF());
             }
 
         } catch (err) {
@@ -32,6 +33,7 @@ const index = () => {
 
     document.title = `${blog?.title}`;
     useEffect(() => {
+        dispatch(SET_LOADER_BLOG_ON());
         getSingleBlog();
 
     }, [])

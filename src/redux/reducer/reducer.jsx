@@ -23,13 +23,21 @@ const reducer = (state = intState, action) => {
             return { ...state, blogs: action.payload };
         case "LOADER_OFF":
             return { ...state, loading: false };
+        case "LOADER_ON":
+            return { ...state, loading: true };
+
         case "SET_ERROR":
             return { ...state, errorMessage: action.payload };
 
         case "SET_SINGLE_BLOG":
             return { ...state, blog: action.payload };
-        case "SET_LOADER_BLOG":
+
+        case "SET_LOADER_BLOG_OFF":
             return { ...state, loadingBlog: false };
+
+        case "SET_LOADER_BLOG_ON":
+            return { ...state, loadingBlog: true };
+
         case "SET_ERROR_BLOG":
             return { ...state, errorMessageBlog: action.payload };
 

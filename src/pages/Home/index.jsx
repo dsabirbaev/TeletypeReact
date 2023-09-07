@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "../../components/UI/Card/Card";
 
 import { useDispatch, useSelector } from "react-redux";
-import { SET_BLOGS, SET_ERROR, SET_LOADER } from "../../redux/action/actions";
+import { SET_BLOGS, SET_ERROR, SET_LOADER_OFF, SET_LOADER_BLOG_ON, SET_LOADER_ON } from "../../redux/action/actions";
 import "./style.scss"
 import blogAPI from "../../service/blog";
 const index = () => {
@@ -18,7 +18,7 @@ const index = () => {
 
             if (response.status === 200) {
                 dispatch(SET_BLOGS(response.data));
-                dispatch(SET_LOADER());
+                dispatch(SET_LOADER_OFF());
             }
         } catch (err) {
             dispatch(SET_ERROR(err.message));
@@ -26,6 +26,7 @@ const index = () => {
     }
 
     useEffect(() => {
+        dispatch(SET_LOADER_ON())
         getBlogs();
         document.title = "Teletype";
     }, [])

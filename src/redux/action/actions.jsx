@@ -5,8 +5,12 @@ export const SET_BLOGS = (data) => {
     return {type : "SET_BLOGS", payload: data};
 }
 
-export const SET_LOADER = () => {
+export const SET_LOADER_OFF = () => {
     return {type: "LOADER_OFF"};
+}
+
+export const SET_LOADER_ON = () => {
+    return {type: "LOADER_ON"};
 }
 
 export const SET_ERROR = (data) => {
@@ -18,8 +22,12 @@ export const SET_SINGLE_BLOG = (data) => {
     return {type : "SET_SINGLE_BLOG", payload: data};
 }
 
-export const SET_LOADER_BLOG = () => {
-    return {type: "SET_LOADER_BLOG"};
+export const SET_LOADER_BLOG_OFF = () => {
+    return {type: "SET_LOADER_BLOG_OFF"};
+}
+
+export const SET_LOADER_BLOG_ON = () => {
+    return {type: "SET_LOADER_BLOG_ON"};
 }
 
 export const SET_ERROR_BLOG = (data) => {
