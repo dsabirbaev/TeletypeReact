@@ -10,6 +10,7 @@ import SingleBlog from "../pages/SingleBlog";
 import CreateBlog from "../pages/CreateBlog";
 import NotFound from "../pages/NotFound";
 
+import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
             {
                 path: "/createblog",
                 element: <CreateBlog/>
+            },
+            {
+                path: "/profile",
+                element: <Profile/>
             }
         ]
     },

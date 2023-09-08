@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import user from "../../assets/images/user.png";
 const index = () => {
@@ -9,12 +9,18 @@ const index = () => {
     const [dropdown, setDropdown] = useState(false);
     const isAuth = localStorage.getItem("token");
 
+    const navigate = useNavigate();
     function toggleDarkMode() {
         setDark(!dark);
         document.documentElement.classList.toggle("dark");
     }
     function logOut(){
         localStorage.clear();
+        setDropdown(!dropdown)
+    }
+
+    function getProfile(){
+        navigate("/profile");
         setDropdown(!dropdown)
     }
     return (
@@ -80,7 +86,7 @@ const index = () => {
                                 <div className="w-[400px]  rounded-[24px] bg-white p-5 me-8">
                                     <h2 className="flex items-center gap-x-3 mb-4"><img src={user} alt="pic" className="w-10 h-10 bg-lime-500 rounded-full" /> <span className="text-[22px] text-[#1A1919] font-semibold"> {localStorage.getItem("username")}</span></h2>
                                     <p className="text-[16px] font-semibold text-gray-700 mb-2">Блог</p>
-                                    <div className="flex items-center gap-x-3  px-3 py-[14px] border rounded-[16px] hover:bg-gray-100 cursor-pointer duration-200 mb-2">
+                                    <div onClick={() => getProfile()} className="flex items-center gap-x-3  px-3 py-[14px] border rounded-[16px] hover:bg-gray-100 cursor-pointer duration-200 mb-2">
                                         <img src={user} alt="pic" className="w-6 h-6 bg-lime-500 rounded-full" /> <span className="text-[15px] text-[#1A1919] font-semibold"> {localStorage.getItem("username")}</span>
                                     </div>
                                     <div className="flex items-center gap-x-[2px] text-[15px] font-medium hover:bg-gray-100 rounded-md cursor-pointer duration-200 p-1 mb-2">

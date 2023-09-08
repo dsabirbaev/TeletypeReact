@@ -69,6 +69,7 @@ const index = () => {
                         }
 
                     </div>
+                    davran
                 </div>
 
             </div>
