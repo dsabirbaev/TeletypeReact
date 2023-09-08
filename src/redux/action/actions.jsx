@@ -50,3 +50,7 @@ export const SET_MODAL_WINDOW = () => {
 export const SET_USER_DATA = (data) => {
     return {type: "SET_USER_DATA", payload: data};
 }
+
+export const SET_LOADER_PROFILE = () => {
+    return {type: "SET_LOADER_PROFILE"};
+}

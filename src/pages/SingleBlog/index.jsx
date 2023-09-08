@@ -83,6 +83,7 @@ const index = () => {
                             <h1 className="text-xl font-semibold dark:text-white mb-2">{blog?.user?.full_name}</h1>
                             <h2 className="text-xl font-semibold text-gray-400">{blog?.user?.username}</h2>
                         </div>
+                        
                         <button className="border-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:border-blue-400">Follow</button>
 
                     </div>

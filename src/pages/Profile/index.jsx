@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import useUser from "../../service/user/useUser";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_USER_DATA } from "../../redux/action/actions";
+import { SET_LOADER_PROFILE, SET_USER_DATA } from "../../redux/action/actions";
 import CardProfile from "../../components/UI/CardProfile/CardProfile";
 
 const index = () => {
-    const { userData } = useSelector((data) => data);
+    const { userData, loadingProfile } = useSelector((data) => data);
     const dispatch = useDispatch();
 
     console.log(userData)
@@ -18,7 +18,7 @@ const index = () => {
     const getUserData = () => {
         useUser.getUser(userID).then((res) => {
             dispatch(SET_USER_DATA(res.data))
-            // console.log(res)
+            dispatch(SET_LOADER_PROFILE())
         })
     }
 
@@ -26,7 +26,14 @@ const index = () => {
         getUserData()
         document.title = `Profile | ${localStorage.getItem("username")}`
     }, [])
- 
+    
+    if (!loadingProfile) {
+        return <div className="loader-single-blog w-screen h-screen bg-white fixed z-40 top-0 left-0 flex items-center justify-center">
+            <svg viewBox="25 25 50 50">
+                <circle r="20" cy="50" cx="50"></circle>
+            </svg>
+        </div>
+    }
     return (
         <section className="pt-[120px] pb-5">
             <div className="container">
