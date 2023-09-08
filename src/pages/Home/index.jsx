@@ -69,7 +69,7 @@ const index = () => {
                         }
 
                     </div>
-                    davran08
+                    
                 </div>
 
             </div>
