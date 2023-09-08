@@ -46,3 +46,7 @@ export const SET_DISLIKE = () => {
 export const SET_MODAL_WINDOW = () => {
     return {type: "SET_MODAL_WINDOW"};
 }
+
+export const SET_USER_DATA = (data) => {
+    return {type: "SET_USER_DATA", payload: data};
+}

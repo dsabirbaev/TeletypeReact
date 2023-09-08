@@ -1,7 +1,7 @@
 
 import useBlog from "../../service/blog/useBlog";
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { SET_SINGLE_BLOG, SET_ERROR_BLOG, SET_LOADER_BLOG_OFF, SET_LOADER_BLOG_ON, SET_LIKE, SET_DISLIKE } from "../../redux/action/actions";
@@ -12,7 +12,7 @@ const index = () => {
 
     const { blog, likeCount, dislikeCount, loadingBlog } = useSelector((data) => data);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const { id } = useParams();
 
 
@@ -30,6 +30,9 @@ const index = () => {
         }
     }
 
+    const back = () => {
+        navigate(-1);
+    }
 
     document.title = `${blog?.title}`;
     useEffect(() => {
@@ -63,14 +66,14 @@ const index = () => {
 
     return (
         <section className='pt-[150px] pb-8 relative'>
-            <Link to="/">
+            <div onClick={() => back()}>
                 <span title="Back" className="absolute top-20 left-5 w-[40px] h-[40px] hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer duration-200 flex items-center justify-center rounded-full">
 
                     <svg className="w-5 h-5 text-indigo-600  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1 1.3 6.326a.91.91 0 0 0 0 1.348L7 13" />
                     </svg>
                 </span>
-            </Link>
+            </div>
 
             <div className='container'>
                 <div className="wrapper">
