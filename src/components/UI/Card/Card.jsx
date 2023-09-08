@@ -28,7 +28,9 @@ const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
         "декабря"
     ];
 
-   
+    const handleOpenModal = () => {
+        dispatch(SET_MODAL_WINDOW()); 
+    };
 
     return (
 
@@ -43,9 +45,9 @@ const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
 
                 </p>
                
-                <p onClick={() =>  dispatch(SET_MODAL_WINDOW())}  className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
+                <p onClick={handleOpenModal}  className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
              
-                <CardModal/>
+                <CardModal isOpen={modalWindow} />
 
                 <p className="text-[#949494] flex items-center gap-x-4  dark:text-white">
                     <span>{`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}</span>

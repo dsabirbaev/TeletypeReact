@@ -1,5 +1,5 @@
 
-import blogAPI from "../../service/blog";
+import useBlog from "../../service/blog/useBlog";
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const index = () => {
     const getSingleBlog = async () => {
 
         try {
-            const response = await blogAPI.singleBlog(id);
+            const response = await useBlog.getBlogItem(id);
             if (response.status === 200) {
                 dispatch(SET_SINGLE_BLOG(response.data));
                 dispatch(SET_LOADER_BLOG_OFF());

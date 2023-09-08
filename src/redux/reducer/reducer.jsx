@@ -48,7 +48,7 @@ const reducer = (state = intState, action) => {
             return { ...state, dislikeCount: state.dislikeCount + 1 };
 
         case "SET_MODAL_WINDOW":
-            return { ...state, modalWindow: true };
+            return { ...state, modalWindow: !state.modalWindow };
         default:
             return state;
     }

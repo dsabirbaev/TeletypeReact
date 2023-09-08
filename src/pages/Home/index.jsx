@@ -5,7 +5,8 @@ import Card from "../../components/UI/Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_BLOGS, SET_ERROR, SET_LOADER_OFF, SET_LOADER_BLOG_ON, SET_LOADER_ON } from "../../redux/action/actions";
 import "./style.scss"
-import blogAPI from "../../service/blog";
+import useBlog from "../../service/blog/useBlog";
+
 const index = () => {
     const isAuth = localStorage.getItem("token");
 
@@ -14,7 +15,7 @@ const index = () => {
 
     const getBlogs = async () => {
         try {
-            const response = await blogAPI.blogs();
+            const response = await useBlog.getBlog();
 
             if (response.status === 200) {
                 dispatch(SET_BLOGS(response.data));

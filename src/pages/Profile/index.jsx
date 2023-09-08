@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import "./style.scss";
 
 const index = () => {
+
+    
     return (
         <section className="pt-[120px]">
             <div className="container">

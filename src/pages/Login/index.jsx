@@ -1,7 +1,8 @@
 
 import { useState } from "react";
 import "./style.scss";
-import blogAPI from "../../service/blog";
+import useUser from "../../service/user/useUser";
+
 import {useNavigate} from "react-router-dom";
 const index = () => {
     const navigate = useNavigate();
@@ -15,10 +16,11 @@ const index = () => {
         }
 
         try{
-            const response = await blogAPI.login(loginValue);
+            const response = await useUser.login(loginValue);
+            console.log(response)
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", response.data?.user?.full_name);
-            localStorage.setItem("id", response.data?.id);
+            localStorage.setItem("my_id", response.data?.user?.id);
             navigate(-1);
         }catch(err){
             console.log(err.message);

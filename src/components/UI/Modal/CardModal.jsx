@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { useSelector } from "react-redux";
 
-const CardModal = () => {
+const CardModal = ({ isOpen }) => {
 
 
     const { modalWindow } = useSelector((data) => data);
-
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     const showModal = () => {
@@ -22,7 +22,7 @@ const CardModal = () => {
     return (
         <>
            
-            <Modal title="Basic Modal" open={modalWindow} onOk={handleOk}>
+            <Modal title="Basic Modal" open={isOpen} onOk={handleOk}>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
                 <p>Some contents...</p>
