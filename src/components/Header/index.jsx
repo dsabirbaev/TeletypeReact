@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import "./style.scss";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 
 import user from "../../assets/images/user.png";
 const index = () => {
@@ -10,19 +10,25 @@ const index = () => {
     const isAuth = localStorage.getItem("token");
 
     const navigate = useNavigate();
+    const { pathname } = useLocation()
     function toggleDarkMode() {
         setDark(!dark);
         document.documentElement.classList.toggle("dark");
     }
-    function logOut(){
+    function logOut() {
         localStorage.clear();
         setDropdown(!dropdown)
     }
 
-    function getProfile(){
+    const getProfile = () => {
         navigate("/profile");
         setDropdown(!dropdown)
     }
+    if(dropdown){
+        document.body.style.overflowY = 'hidden';
+
+    }
+ 
     return (
         <header className="duration-300 shadow-md fixed top-0 left-0 z-50 bg-[rgba(255, 255, 255, .6)] dark:bg-gray-700 backdrop-blur-[10px] w-full">
             <div>
@@ -57,13 +63,19 @@ const index = () => {
                         {
                             isAuth ?
                                 <div className="flex items-center gap-x-5 ">
-                                    <Link to="/createblog">
-                                        <span>
-                                            <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                            </svg>
-                                        </span>
-                                    </Link>
+                                    {pathname === "/createblog" ? 
+                                        <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m7 10 2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                        </svg> :
+                                        <Link to="/createblog">
+                                            <span>
+                                                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 5.757v8.486M5.757 10h8.486M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                </svg>
+                                            </span>
+                                        </Link>
+                                    }
+
 
                                     <span className="block h-[40px] w-[2px] bg-[#e0e0e0]"></span>
                                     <div className="flex items-center gap-x-3">
@@ -82,8 +94,8 @@ const index = () => {
 
                     {
                         dropdown ?
-                            <div className="absolute w-screen h-screen bg-[#000000B3] z-40 top-[100%] left-0 pt-5 flex items-start justify-end">
-                                <div className="w-[400px]  rounded-[24px] bg-white p-5 me-8">
+                            <div onClick={() => setDropdown(!dropdown)} className="absolute w-screen h-screen bg-[#000000B3] z-40  top-[100%] left-0 pt-5 flex items-start justify-end">
+                                <div onClick={(e) => e.stopPropagation()} className="w-[400px]  rounded-[24px] bg-white p-5 me-5">
                                     <h2 className="flex items-center gap-x-3 mb-4"><img src={user} alt="pic" className="w-10 h-10 bg-lime-500 rounded-full" /> <span className="text-[22px] text-[#1A1919] font-semibold"> {localStorage.getItem("username")}</span></h2>
                                     <p className="text-[16px] font-semibold text-gray-700 mb-2">Блог</p>
                                     <div onClick={() => getProfile()} className="flex items-center gap-x-3  px-3 py-[14px] border rounded-[16px] hover:bg-gray-100 cursor-pointer duration-200 mb-2">

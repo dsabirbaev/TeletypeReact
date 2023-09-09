@@ -58,6 +58,9 @@ const reducer = (state = intState, action) => {
 
         case "SET_LOADER_PROFILE":
             return { ...state, loadingProfile: !state.loadingProfile };
+
+        case "DELETE":
+            return { ...state, userData: action.payload };
         default:
             return state;
     }

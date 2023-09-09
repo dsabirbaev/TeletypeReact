@@ -2,10 +2,28 @@
 import { Link } from "react-router-dom";
 
 import "./style.scss";
+import useBlog from "../../../service/blog/useBlog";
 
+import { Button, message, Popconfirm } from 'antd';
+import { useDispatch, useSelector } from "react-redux";
 
-const CardProfile = ({ case: { title, body, user, views, createdAt, id } }) => {
+import { SET_USER_DATA, DELETE} from "../../../redux/action/actions";
 
+const CardProfile = ({ case: { title, createdAt, id } }) => {
+
+    const {userData} = useSelector((data) => data)
+    const dispatch = useDispatch();
+
+    console.log(userData)
+    const deleteBlogPost = (id) => {
+
+        useBlog.deleteBlog(id).then((res) => {
+            // console.log(res.data.id)
+            dispatch(DELETE(res.data)) 
+        }).catch((err) => {
+            console.log(err.message)
+        })
+    }
 
 
     const date = new Date(createdAt);
@@ -24,37 +42,40 @@ const CardProfile = ({ case: { title, body, user, views, createdAt, id } }) => {
         "декабря"
     ];
 
+    const confirm = (id) => {
+        deleteBlogPost(id)
+        message.success('Пост удален!');
+     
+    };
+    
 
     return (
-        <Link to={`/profile/blog/${id}`}>
-            <div className="p-5 border rounded-[16px] hover:border-gray-500 duration-200 w-[800px]">
 
-                <h2 className="text-[28px] mb-[10px] text-[#1A1919] font-bold dark:text-white">{title.slice(0, 20)}</h2>
-
-
-                <p className="text-[17px] text-[#1A1919] mb-5 dark:text-white">{body.length > 250 ? (<>{body.slice(0, 250)} <span className="font-bold"> ...</span> </>) : body}
-
-                </p>
-
-
-
-                <p className="text-[#949494] flex items-center gap-x-4  dark:text-white">
-                    <span>{`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}</span>
-
-                    <span className="flex items-center justify-center">
-                        <span className="mr-2">
-                            <svg className="w-[18px] h-[26px] text-[#949494] dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
-                                <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-                                    <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-                                    <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z" />
-                                </g>
-                            </svg>
-                        </span>
-                        {views}
-                    </span>
+        <div className="flex justify-between items-center gap-x-4 p-5 border rounded-[16px] hover:border-gray-500 duration-200 w-[800px]">
+            <div className="flex items-center justify-between grow">
+                <Link to={`/profile/blog/${id}`}>
+                    <h2 className="text-[20px] text-[#1A1919] font-semibold hover:text-teal-400 dark:text-white">{title.slice(0, 20)}</h2>
+                </Link>
+                <p className="text-[#949494]  dark:text-white text-md">
+                    {`${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`}
                 </p>
             </div>
-        </Link>
+
+
+            <div className="flex items-center gap-x-2">
+                <Button className="text-blue-600 border-blue-600"> Изменить </Button>
+                <Popconfirm
+                    title="Предупреждение!"
+                    description="Вы уверены, что хотите удалить эту задачу?"
+                    onConfirm={() => confirm(id)} 
+                    okText="Да"
+                    cancelText="Нет"
+                >
+                    <Button danger>Удалить</Button>
+                </Popconfirm>
+            </div>
+        </div>
+
     );
 };
 
