@@ -6,7 +6,7 @@ const headers =  {
 }
 
 const useBlog = {
-    createBlog: (data) => api.post("/blog", data),
+    createBlog: (data) => api.post("/blog", data, {headers}),
     getBlog: async() => api.get("/blog"),
     getBlogItem: (id) => api.get(`/blog/${id}`),
     updateBlog: (id,data) => api.patch(`/blog/${id}`, data, {headers}),
