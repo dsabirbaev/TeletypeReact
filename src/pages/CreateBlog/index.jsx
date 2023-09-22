@@ -24,7 +24,7 @@ const index = () => {
                 toast.error("Ошибка!", { autoClose: 1500 });
             })
         }else{
-            toast.error("Заполни все поля!", { autoClose: 1500 });
+            toast.error("Пожалуйста, заполните все поля!", { autoClose: 1500 });
         }
       
     }

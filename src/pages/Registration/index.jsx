@@ -1,18 +1,62 @@
 
-
-
-
+import { useState } from "react";
+import useUser from "../../service/user/useUser";
+import {useNavigate} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 import "./style.scss";
 
 const index = () => {
+
+    const [fullName, setFullName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    
+
+    const register = () => {
+        const registerValue = {
+            full_name: fullName,
+            username: username,
+            password: password
+        }
+
+        if(registerValue.full_name.trim().length && registerValue.username.trim().length && registerValue.password.trim().length){
+
+            useUser.register(registerValue).then((res) => {
+                toast.success("Аккаунт создан!", { autoClose: 1000 });
+
+                setTimeout(() => {
+                    return navigate("/auth/login");
+                }, 1500)
+               
+            }).catch((err) => {
+                console.log(err.message);
+                toast.error("Ошибка!", { autoClose: 1500 });
+            })
+           
+        }else{
+            toast.error("Пожалуйста, заполните все поля!", { autoClose: 1500 });
+        }
+        
+          
+        
+    }
+
+    function onSubmit(e){
+        e.preventDefault();
+        register();
+    }
     return (
         <div className="flex items-center justify-center flex-col">
-            <form className="flex flex-col items-center mb-8 w-full">
-                <input type="text" placeholder="John Doe" autoComplete="name" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
-                <input type="email" placeholder="Email" autoComplete="email" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
-                <input type="password" placeholder="Пароль" autoComplete="current-password" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+            <ToastContainer />
+            <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
+
+                <input onChange={((e) => setFullName(e.target.value))} type="text" placeholder="John Doe" autoComplete="name" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                <input onChange={((e) => setUsername(e.target.value))} type="text" placeholder="@пример" autoComplete="email" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                <input onChange={((e) => setPassword(e.target.value))} type="password" placeholder="Пароль" autoComplete="current-password" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
                 <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Зарегистрироваться</button>
             </form>
+
             <div className="flex justify-center items-center gap-x-3 mb-8">
                 <span className="w-8 h-8 rounded-full bg-[#2F4694] flex items-center justify-center">
                     <svg className="w-[7px] h-[15px] text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">

@@ -3,31 +3,42 @@ import { useState } from "react";
 import "./style.scss";
 import useUser from "../../service/user/useUser";
 import {useNavigate} from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
 import { Button, message } from "antd";
+
+
 const index = () => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const login = async() => {
+    const login = () => {
         const loginValue = {
-            username: email,
+            username: username,
             password: password
         }
 
-        try{
-            const response = await useUser.login(loginValue);
-            console.log(response)
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("username", response.data?.user?.full_name);
-            localStorage.setItem("my_id", response.data?.user?.id);
-            response.data && message.success("Successfully logged in");
-            return navigate(-1);
-        }catch(err){
-            console.log(err.message);
+        if(loginValue.username.trim().length && loginValue.password.trim().length){
+            useUser.login(loginValue).then((res) => {
+                localStorage.setItem("token", res?.data?.token);
+                localStorage.setItem("username", res?.data?.user?.full_name);
+                localStorage.setItem("my_id", res?.data?.user?.id);
+                res?.data && message.success("Successfully logged in");
+
+                return navigate("/");
+            }).catch((err) => {
+                console.log(err.message);
+                toast.error("Ошибка!", { autoClose: 1500 });
+            })
+           
+        }else{
+            toast.error("Пожалуйста, заполните все поля!", { autoClose: 1500 });
         }
+        
+          
+        
     }
+
     function onSubmit(e){
         e.preventDefault();
         login();
@@ -35,8 +46,9 @@ const index = () => {
     return (
 
         <div className="flex items-center justify-center flex-col">
+            <ToastContainer />
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
-                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
+                <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Your username" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button>
             
