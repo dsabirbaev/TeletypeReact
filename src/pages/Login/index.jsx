@@ -2,8 +2,9 @@
 import { useState } from "react";
 import "./style.scss";
 import useUser from "../../service/user/useUser";
-
 import {useNavigate} from "react-router-dom";
+
+import { Button, message } from "antd";
 const index = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -21,7 +22,8 @@ const index = () => {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("username", response.data?.user?.full_name);
             localStorage.setItem("my_id", response.data?.user?.id);
-            navigate(-1);
+            response.data && message.success("Successfully logged in");
+            return navigate(-1);
         }catch(err){
             console.log(err.message);
         }
@@ -37,6 +39,7 @@ const index = () => {
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button>
+            
             </form>
             <div className="flex justify-center items-center gap-x-3 mb-8">
                 <span className="w-8 h-8 rounded-full bg-[#2F4694] flex items-center justify-center">

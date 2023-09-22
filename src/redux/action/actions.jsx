@@ -51,12 +51,12 @@ export const SET_USER_DATA = (data) => {
     return {type: "SET_USER_DATA", payload: data};
 }
 
-export const SET_LOADER_PROFILE = () => {
-    return {type: "SET_LOADER_PROFILE"};
+export const SET_LOADER_PROFILE_OFF = () => {
+    return {type: "SET_LOADER_PROFILE_OFF"};
 }
 
-export const DELETE = (data) => {
-    return {type: "DELETE", payload: data};
+export const SET_LOADER_PROFILE_ON = () => {
+    return {type: "SET_LOADER_PROFILE_ON"};
 }
 
 

@@ -7,19 +7,19 @@ import useBlog from "../../../service/blog/useBlog";
 import { Button, message, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 
-import { SET_USER_DATA, DELETE} from "../../../redux/action/actions";
+import { SET_USER_DATA} from "../../../redux/action/actions";
 
 const CardProfile = ({ case: { title, createdAt, id } }) => {
 
     const {userData} = useSelector((data) => data)
     const dispatch = useDispatch();
 
-    console.log(userData)
+   
     const deleteBlogPost = (id) => {
 
         useBlog.deleteBlog(id).then((res) => {
             // console.log(res.data.id)
-            dispatch(DELETE(res.data)) 
+            
         }).catch((err) => {
             console.log(err.message)
         })
