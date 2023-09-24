@@ -21,7 +21,7 @@ const index = () => {
             useBlog.createBlog(blog).then((res) => {
 
                 message.success("Блог опубликован!");
-                navigate("/");
+                navigate(-1);
                 setTitle(" ");
                 setBody(" ");
             }).catch((err) => {

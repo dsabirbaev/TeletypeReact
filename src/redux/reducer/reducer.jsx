@@ -51,13 +51,18 @@ const reducer = (state = intState, action) => {
             return { ...state, dislikeCount: state.dislikeCount + 1 };
 
         case "SET_MODAL_WINDOW":
-            return { ...state, modalWindow: !state.modalWindow };
+            return { ...state, modalWindow: action.payload };
 
         case "SET_USER_DATA":
             return { ...state, userData: action.payload };
 
+            
+        case "UPDATE":
+            return { ...state, userData: [...state.userData, action.payload] };
+
         case "SET_LOADER_PROFILE_OFF":
             return { ...state, loadingProfile: false };
+
         case "SET_LOADER_PROFILE_ON":
             return { ...state, loadingProfile: true };
 

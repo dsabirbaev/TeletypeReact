@@ -17,6 +17,7 @@ const index = () => {
 
     const getUserData = () => {
         useUser.getUser(userID).then((res) => {
+            console.log(res)
             dispatch(SET_USER_DATA(res.data))
             dispatch(SET_LOADER_PROFILE_OFF())
         })
@@ -75,14 +76,14 @@ const index = () => {
                     <div>
                         <div className="flex border items-center w-[500px] rounded-full py-[4px] px-[2px] mb-5">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 32 32" className="icon search__form_icon dark:fill-white" data-icon="search" data-v-d7037a0b=""><path fillRule="evenodd" d="M8.747 15.059a6.312 6.312 0 1112.623 0 6.312 6.312 0 01-12.623 0zm11.28 6.028a7.812 7.812 0 111.06-1.06l3.447 3.446a.75.75 0 11-1.06 1.06l-3.447-3.446z" clipRule="evenodd"></path></svg>
-                            <input className="search text-[14px] dark:bg-transparent appearance-none border-none  outline-0 p-0 w-full" type="text" placeholder="Найти..." />
+                            <input className="focus:ring-0 search text-[14px] dark:bg-transparent appearance-none border-none  outline-0 p-0 w-full" type="text" placeholder="Найти..." />
                         </div>
 
                         <div className="flex flex-col gap-y-2">
                           
                             {
                                 userData?.blog?.map((item)=> {
-                                    return <CardProfile key={item.id} case={item}/>
+                                    return <CardProfile key={item.id} case={item} getUserData={getUserData}/>
                                 })
                             }
                          

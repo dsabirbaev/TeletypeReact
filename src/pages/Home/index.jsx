@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../../components/UI/Card/Card";
-
 import { useDispatch, useSelector } from "react-redux";
 import { SET_BLOGS, SET_ERROR, SET_LOADER_OFF, SET_LOADER_BLOG_ON, SET_LOADER_ON } from "../../redux/action/actions";
 import "./style.scss"

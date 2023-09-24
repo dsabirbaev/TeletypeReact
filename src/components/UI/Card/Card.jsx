@@ -45,7 +45,7 @@ const Card = ({ case: { title, body, user, views, createdAt, id}}) => {
 
                 </p>
                
-                <p onClick={handleOpenModal}  className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
+                <p onClick={() => handleOpenModal()}  className="mb-[10px] font-bold cursor-pointer hover:underline dark:text-white">● {user?.username}</p>
              
                 <CardModal isOpen={modalWindow} />
 

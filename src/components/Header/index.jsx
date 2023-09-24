@@ -17,6 +17,7 @@ const index = () => {
     }
     function logOut() {
         localStorage.clear();
+        navigate("/");
         setDropdown(!dropdown)
     }
 
@@ -24,6 +25,11 @@ const index = () => {
         navigate("/profile");
         setDropdown(!dropdown)
     }
+    const getSettigs = () => {
+        navigate("/settings");
+        setDropdown(!dropdown)
+    }
+
     if(dropdown){
         document.body.style.overflowY = 'hidden';
 
@@ -101,8 +107,8 @@ const index = () => {
                                     <div onClick={() => getProfile()} className="flex items-center gap-x-3  px-3 py-[14px] border rounded-[16px] hover:bg-gray-100 cursor-pointer duration-200 mb-2">
                                         <img src={user} alt="pic" className="w-6 h-6 bg-lime-500 rounded-full" /> <span className="text-[15px] text-[#1A1919] font-semibold"> {localStorage.getItem("username")}</span>
                                     </div>
-                                    <div className="flex items-center gap-x-[2px] text-[15px] font-medium hover:bg-gray-100 rounded-md cursor-pointer duration-200 p-1 mb-2">
-                                        <svg data-v-5b5e6a25="" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 32 32" className="icon accountPopup__action_icon" data-icon="settings"><path fillRule="evenodd" d="M12.536 8.75c-.447 0-.86.238-1.082.625l-3.464 6a1.252 1.252 0 000 1.25l3.463 6c.223.387.636.625 1.083.625h6.928c.446 0 .86-.238 1.082-.625l3.464-6a1.252 1.252 0 000-1.25l-3.464-6a1.249 1.249 0 00-1.081-.625h-6.93zm-2.382-.125a2.75 2.75 0 012.382-1.375h6.929c.982 0 1.89.524 2.38 1.375l3.465 6c.49.85.49 1.899 0 2.75l-3.464 6a2.75 2.75 0 01-2.382 1.375h-6.928c-.983 0-1.89-.524-2.382-1.375l-3.464-6a2.752 2.752 0 010-2.75l3.464-6z" clip-rule="evenodd"></path><path fillRule="evenodd" d="M18.27 13.73a3.209 3.209 0 10-4.538 4.538l-.531.531.53-.53a3.209 3.209 0 004.538 0l.53.53-.53-.53a3.209 3.209 0 000-4.538zm1.06-1.06a4.709 4.709 0 10-6.66 6.66 4.709 4.709 0 006.66-6.66z" clipRule="evenodd">
+                                    <div onClick={() => getSettigs()} className="flex items-center gap-x-[2px] text-[15px] font-medium hover:bg-gray-100 rounded-md cursor-pointer duration-200 p-1 mb-2">
+                                        <svg data-v-5b5e6a25="" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 32 32" className="icon accountPopup__action_icon" data-icon="settings"><path fillRule="evenodd" d="M12.536 8.75c-.447 0-.86.238-1.082.625l-3.464 6a1.252 1.252 0 000 1.25l3.463 6c.223.387.636.625 1.083.625h6.928c.446 0 .86-.238 1.082-.625l3.464-6a1.252 1.252 0 000-1.25l-3.464-6a1.249 1.249 0 00-1.081-.625h-6.93zm-2.382-.125a2.75 2.75 0 012.382-1.375h6.929c.982 0 1.89.524 2.38 1.375l3.465 6c.49.85.49 1.899 0 2.75l-3.464 6a2.75 2.75 0 01-2.382 1.375h-6.928c-.983 0-1.89-.524-2.382-1.375l-3.464-6a2.752 2.752 0 010-2.75l3.464-6z" clipRule="evenodd"></path><path fillRule="evenodd" d="M18.27 13.73a3.209 3.209 0 10-4.538 4.538l-.531.531.53-.53a3.209 3.209 0 004.538 0l.53.53-.53-.53a3.209 3.209 0 000-4.538zm1.06-1.06a4.709 4.709 0 10-6.66 6.66 4.709 4.709 0 006.66-6.66z" clipRule="evenodd">
                                         </path>
                                         </svg>Настройки
                                     </div>

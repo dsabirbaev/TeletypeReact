@@ -10,10 +10,13 @@ import SingleBlog from "../pages/SingleBlog";
 import CreateBlog from "../pages/CreateBlog";
 import NotFound from "../pages/NotFound";
 
+import Settings from "../pages/Settings";
+
 import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
+
 
 const router = createBrowserRouter([
     {
@@ -40,7 +43,11 @@ const router = createBrowserRouter([
             {
                 path: "/profile/blog/:id",
                 element: <SingleBlog/>
-            }
+            },
+            {
+                path: "/settings",
+                element: <Settings/>
+            },
         ]
     },
     {

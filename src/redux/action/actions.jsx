@@ -51,6 +51,10 @@ export const SET_USER_DATA = (data) => {
     return {type: "SET_USER_DATA", payload: data};
 }
 
+export const UPDATE = (data) => {
+    return {type: "UPDATE", payload: data};
+}
+
 export const SET_LOADER_PROFILE_OFF = () => {
     return {type: "SET_LOADER_PROFILE_OFF"};
 }
