@@ -27,3 +27,8 @@ body {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.ant-message-notice-content {
+  transform: scale(1.5);
+  margin-top: 50px;
+}

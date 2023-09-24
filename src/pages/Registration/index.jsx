@@ -2,7 +2,8 @@
 import { useState } from "react";
 import useUser from "../../service/user/useUser";
 import {useNavigate} from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+
+import { message } from "antd";
 import "./style.scss";
 
 const index = () => {
@@ -23,19 +24,15 @@ const index = () => {
         if(registerValue.full_name.trim().length && registerValue.username.trim().length && registerValue.password.trim().length){
 
             useUser.register(registerValue).then((res) => {
-                toast.success("Аккаунт создан!", { autoClose: 1000 });
-
-                setTimeout(() => {
-                    return navigate("/auth/login");
-                }, 1500)
-               
+                message.success("Аккаунт создан!");
+                return navigate("/auth/login");
             }).catch((err) => {
                 console.log(err.message);
-                toast.error("Ошибка!", { autoClose: 1500 });
+                message.error("Ошибка при подключении!");
             })
            
         }else{
-            toast.error("Пожалуйста, заполните все поля!", { autoClose: 1500 });
+            message.warning("Пожалуйста, заполните все поля!");
         }
         
           
@@ -48,7 +45,7 @@ const index = () => {
     }
     return (
         <div className="flex items-center justify-center flex-col">
-            <ToastContainer />
+            
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
 
                 <input onChange={((e) => setFullName(e.target.value))} type="text" placeholder="John Doe" autoComplete="name" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />

@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./style.scss";
 import useUser from "../../service/user/useUser";
 import {useNavigate} from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+
 import { Button, message } from "antd";
 
 
@@ -23,16 +23,16 @@ const index = () => {
                 localStorage.setItem("token", res?.data?.token);
                 localStorage.setItem("username", res?.data?.user?.full_name);
                 localStorage.setItem("my_id", res?.data?.user?.id);
-                res?.data && message.success("Successfully logged in");
+                res?.data && message.success("Вы вошли в систему!");
 
                 return navigate("/");
             }).catch((err) => {
                 console.log(err.message);
-                toast.error("Ошибка!", { autoClose: 1500 });
+                message.error("Ошибка при подключении!");
             })
            
         }else{
-            toast.error("Пожалуйста, заполните все поля!", { autoClose: 1500 });
+            toast.warning("Пожалуйста, заполните все поля!", { autoClose: 1500 });
         }
         
           
@@ -46,7 +46,7 @@ const index = () => {
     return (
 
         <div className="flex items-center justify-center flex-col">
-            <ToastContainer />
+           
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
                 <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Your username" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
