@@ -2,12 +2,13 @@ import { useState } from "react";
 import useBlog from "../../service/blog/useBlog";
 
 import { useNavigate } from "react-router-dom";
-import { message } from "antd";
+import { Button, message } from "antd";
 const index = () => {
     const navigate = useNavigate();
     const id = localStorage.getItem("my_id");
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const createBlog = () => {
         const blog = {
@@ -21,11 +22,13 @@ const index = () => {
             useBlog.createBlog(blog).then((res) => {
 
                 message.success("Блог опубликован!");
+                res.data && setIsLoading(false);
                 navigate(-1);
                 setTitle(" ");
                 setBody(" ");
             }).catch((err) => {
                 console.log(err.message)
+                setIsLoading(false);
                 message.error("Ошибка при подключении!");
                 
             })
@@ -36,6 +39,7 @@ const index = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
+        setIsLoading(true);
         createBlog();
     }
 
@@ -48,7 +52,10 @@ const index = () => {
 
                         <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Заголовок" className="dark:bg-gray-200   border-1 border-indigo-500  outline-none w-full mb-5 rounded-md focus:ring-0" />
                         <textarea value={body} onChange={(e) => setBody(e.target.value)} cols="30" rows="10" placeholder="Наберите текст" className="dark:bg-gray-200 border-1 border-indigo-500  outline-none w-full mb-5 rounde-md focus:ring-0"></textarea>
-                        <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Опубликовать</button>
+                        {/* <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Опубликовать</button> */}
+                        <Button loading={isLoading} className="bg-indigo-600 text-white" size="large" htmlType="submit">
+                            Опубликовать
+                        </Button>
                     </form>
                 </div>
             </div>

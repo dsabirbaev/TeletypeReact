@@ -47,8 +47,8 @@ const index = () => {
                 res.data && setIsLoading(false);
                 return navigate("/profile");
             }).catch((err) => {
-                console.log(err.response.data);
-                console.log(err.response.data.message)
+                console.log(err.message);
+                setIsLoading(false);
                 message.error("Ошибка при подключении!");
             })
 
@@ -72,15 +72,15 @@ const index = () => {
         <section className="pt-[120px] pb-5">
             <div className='container'>
                 <div className="flex items-center justify-center flex-col py-4">
-                    <h1 className="text-center text-2xl font-bold mb-5">Обновить данные</h1>
+                    <h1 className="text-center text-2xl font-bold mb-5 dark:text-white">Обновить данные</h1>
                     <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-[500px] border rounded-lg p-5">
 
-                        <input value={fullName} onChange={((e) => setFullName(e.target.value))} type="text" placeholder="John Doe" autoComplete="name" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
-                        <input value={username} onChange={((e) => setUsername(e.target.value))} type="text" placeholder="@пример" autoComplete="email" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
-                        <input onChange={((e) => setPassword(e.target.value))} type="password" placeholder="Пароль" autoComplete="current-password" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px]" />
+                        <input value={fullName} onChange={((e) => setFullName(e.target.value))} type="text" placeholder="John Doe"  className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px] dark:bg-gray-700" />
+                        <input value={username} onChange={((e) => setUsername(e.target.value))} type="text" placeholder="@пример"  className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px] dark:bg-gray-700" />
+                        <input onChange={((e) => setPassword(e.target.value))} type="password" placeholder="Пароль" className="w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px] text-[13px] dark:bg-gray-700" />
                        
 
-                        <Button loading={isLoading} className="bg-indigo-600 text-white" size="large" htmlType="submit">
+                        <Button loading={isLoading} className="bg-indigo-600 text-white " size="large" htmlType="submit ">
                             Обновить
                         </Button>
                     </form>

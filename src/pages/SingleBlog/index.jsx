@@ -15,7 +15,6 @@ const index = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-
     const getSingleBlog = async () => {
 
         try {

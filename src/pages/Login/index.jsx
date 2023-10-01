@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./style.scss";
 import useUser from "../../service/user/useUser";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Button, message } from "antd";
 
@@ -11,47 +11,51 @@ const index = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [isLoading, setIsLoading] = useState(false);
     const login = () => {
         const loginValue = {
             username: username,
             password: password
         }
 
-        if(loginValue.username.trim().length && loginValue.password.trim().length){
+        if (loginValue.username.trim().length && loginValue.password.trim().length) {
             useUser.login(loginValue).then((res) => {
                 localStorage.setItem("token", res?.data?.token);
                 localStorage.setItem("username", res?.data?.user?.full_name);
                 localStorage.setItem("my_id", res?.data?.user?.id);
                 res?.data && message.success("Вы вошли в систему!");
-
+                res.data && setIsLoading(false);
                 return navigate("/");
             }).catch((err) => {
                 console.log(err.message);
+                setIsLoading(false);
                 message.error("Ошибка при подключении!");
             })
-           
-        }else{
+
+        } else {
             toast.warning("Пожалуйста, заполните все поля!", { autoClose: 1500 });
         }
-        
-          
-        
+
+
+
     }
 
-    function onSubmit(e){
+    function onSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
         login();
     }
     return (
 
         <div className="flex items-center justify-center flex-col">
-           
+
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-8 w-full">
                 <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="Your username" autoComplete="email" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Пароль" autoComplete="current-password" className="text-[13px] w-full mb-3 border border-slate-200 py-2 outline-none rounded-[5px]" />
-                <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button>
-            
+                {/* <button className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]">Войти</button> */}
+                <Button loading={isLoading} className="rounded-[36px] bg-[#1A1919] text-white text-[13px] font-semibold w-fit px-[25px] py-[10px]" size="large" htmlType="submit ">
+                    Войти
+                </Button>
             </form>
             <div className="flex justify-center items-center gap-x-3 mb-8">
                 <span className="w-8 h-8 rounded-full bg-[#2F4694] flex items-center justify-center">
