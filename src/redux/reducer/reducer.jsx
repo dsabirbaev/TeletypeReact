@@ -16,7 +16,9 @@ const intState = {
     modalWindow: false,
 
     userData: [],
-    loadingProfile: true
+    loadingProfile: true,
+
+    
 }
 
 
@@ -56,6 +58,7 @@ const reducer = (state = intState, action) => {
         case "SET_USER_DATA":
             return { ...state, userData: action.payload };
 
+     
             
         case "UPDATE":
             return { ...state, userData: [...state.userData, action.payload] };

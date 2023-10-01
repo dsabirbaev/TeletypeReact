@@ -7,7 +7,7 @@ import useBlog from "../../../service/blog/useBlog";
 import { Button, message, Popconfirm } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 
-import { UPDATE, SET_USER_DATA} from "../../../redux/action/actions";
+
 
 const CardProfile = ({ case: { title, createdAt, id }, getUserData }) => {
 

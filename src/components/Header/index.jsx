@@ -32,7 +32,6 @@ const index = () => {
 
     if(dropdown){
         document.body.style.overflowY = 'hidden';
-
     }
  
     return (

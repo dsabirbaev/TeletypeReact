@@ -17,7 +17,7 @@ const index = () => {
 
     const getUserData = () => {
         useUser.getUser(userID).then((res) => {
-            console.log(res)
+            
             dispatch(SET_USER_DATA(res.data))
             dispatch(SET_LOADER_PROFILE_OFF())
         })
