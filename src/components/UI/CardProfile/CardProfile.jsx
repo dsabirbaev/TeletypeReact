@@ -63,7 +63,10 @@ const CardProfile = ({ case: { title, createdAt, id }, getUserData }) => {
 
 
             <div className="flex items-center gap-x-2">
-                <Button className="text-blue-600 border-blue-600"> Изменить </Button>
+                <Link to={`/blog/edit/${id}`}>
+                    <Button className="text-blue-600 border-blue-600"> Изменить </Button>
+                </Link>
+                
                 <Popconfirm
                     title="Предупреждение!"
                     description="Вы уверены, что хотите удалить эту задачу?"

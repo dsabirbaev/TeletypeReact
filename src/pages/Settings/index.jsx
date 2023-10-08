@@ -47,9 +47,9 @@ const index = () => {
                 res.data && setIsLoading(false);
                 return navigate("/profile");
             }).catch((err) => {
-                console.log(err.message);
+              
                 setIsLoading(false);
-                message.error("Ошибка при подключении!");
+                message.error("При подключении возникла ошибка!");
             })
 
         } else {

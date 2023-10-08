@@ -1,38 +1,55 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.scss";
 import { Link, Navigate, useNavigate, useLocation } from "react-router-dom";
 
 import user from "../../assets/images/user.png";
+
 const index = () => {
-    const [dark, setDark] = useState(false);
+
+    const [dark, setDark] = useState(localStorage.getItem('darkMode') === 'true' || false);
+
     const [dropdown, setDropdown] = useState(false);
     const isAuth = localStorage.getItem("token");
 
     const navigate = useNavigate();
     const { pathname } = useLocation()
-    function toggleDarkMode() {
+
+    const toggleDarkMode = () => {
         setDark(!dark);
-        document.documentElement.classList.toggle("dark");
     }
-    function logOut() {
+    const logOut = () => {
         localStorage.clear();
         navigate("/");
         setDropdown(!dropdown)
+        document.body.style.overflowY = 'auto';
     }
 
     const getProfile = () => {
         navigate("/profile");
         setDropdown(!dropdown)
+        document.body.style.overflowY = 'auto';
     }
     const getSettigs = () => {
         navigate("/settings");
         setDropdown(!dropdown)
+        document.body.style.overflowY = 'auto';
+    }
+
+    const exitDropdown = () => {
+        setDropdown(!dropdown);
+        document.body.style.overflowY = 'auto';
     }
 
     if(dropdown){
         document.body.style.overflowY = 'hidden';
     }
+
+    useEffect(() => {
+        localStorage.setItem('darkMode', dark);
+        dark ?  document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark');
+        
+    }, [dark]);
  
     return (
         <header className="duration-300 shadow-md fixed top-0 left-0 z-50 bg-[rgba(255, 255, 255, .6)] dark:bg-gray-700 backdrop-blur-[10px] w-full">
@@ -99,7 +116,7 @@ const index = () => {
 
                     {
                         dropdown ?
-                            <div onClick={() => setDropdown(!dropdown)} className="absolute w-screen h-screen bg-[#000000B3] z-40  top-[100%] left-0 pt-5 flex items-start justify-end">
+                            <div onClick={() => exitDropdown()} className="absolute w-screen h-screen bg-[#000000B3] z-40  top-[100%] left-0 pt-5 flex items-start justify-end">
                                 <div onClick={(e) => e.stopPropagation()} className="dark:bg-gray-700 w-[400px]  rounded-[24px] bg-white p-5 me-5">
                                     <h2 className="flex items-center gap-x-3 mb-4"><img src={user} alt="pic" className="w-10 h-10 bg-lime-500 rounded-full " /> <span className="text-[22px] text-[#1A1919] font-semibold dark:text-white"> {localStorage.getItem("username")}</span></h2>
                                     <p className="text-[16px] font-semibold text-gray-700 mb-2">Блог</p>

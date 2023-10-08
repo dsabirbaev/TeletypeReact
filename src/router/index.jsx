@@ -16,7 +16,7 @@ import Profile from "../pages/Profile";
 import Auth from "../pages/Auth";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
-
+import EditBlog from "../pages/EditBlog";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile/blog/:id",
                 element: <SingleBlog/>
+            },
+            {
+                path: "/blog/edit/:id",
+                element: <EditBlog/>
             },
             {
                 path: "/settings",
