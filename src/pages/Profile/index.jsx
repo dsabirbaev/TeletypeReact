@@ -14,7 +14,7 @@ const index = () => {
     const my_id = localStorage.getItem("my_id");
     const { id } = useParams();
 
-    const [isFollow, setIsFollow] = useState({});
+    const [isFollow, setIsFollow] = useState();
     const [isLoading, setIsLoading] = useState(false);
 
     const getUserData = () => {
@@ -25,15 +25,17 @@ const index = () => {
         })
     }
 
-
-
+  
     const follow = () => {
+        setIsLoading(true);
         const followID = {
             following_id: id
         }
-        setIsLoading(true);
+       
         useUser.followToUser(followID).then((res) => {
             res.data && setIsLoading(false);
+            getUserData()
+            setIsFollow(true)
         }).catch((err) => {
             setIsLoading(false);
         })
