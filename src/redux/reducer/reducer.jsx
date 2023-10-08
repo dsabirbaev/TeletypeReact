@@ -13,7 +13,7 @@ const intState = {
     likeCount: 0,
     dislikeCount: 0,
 
-    modalWindow: false,
+ 
 
     userData: [],
     loadingProfile: true,
@@ -52,8 +52,6 @@ const reducer = (state = intState, action) => {
         case "SET_DISLIKE":
             return { ...state, dislikeCount: state.dislikeCount + 1 };
 
-        case "SET_MODAL_WINDOW":
-            return { ...state, modalWindow: action.payload };
 
         case "SET_USER_DATA":
             return { ...state, userData: action.payload };

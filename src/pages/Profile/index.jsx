@@ -1,6 +1,6 @@
 
 import user from "../../assets/images/user.png";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useUser from "../../service/user/useUser";
 import "./style.scss";
@@ -11,12 +11,11 @@ import CardProfile from "../../components/UI/CardProfile/CardProfile";
 const index = () => {
     const { userData, loadingProfile } = useSelector((data) => data);
     const dispatch = useDispatch();
-
+    const my_id = localStorage.getItem("my_id");
+    const { id } = useParams();
   
-    const userID = localStorage.getItem("my_id");
-
     const getUserData = () => {
-        useUser.getUser(userID).then((res) => {
+        useUser.getUser(id).then((res) => {
             
             dispatch(SET_USER_DATA(res.data))
             dispatch(SET_LOADER_PROFILE_OFF())
@@ -43,9 +42,13 @@ const index = () => {
                     <div className="flex flex-col w-[400px]">
                         <div className="mb-3">
                             <img src={user} alt="pic" className="mb-2 w-[120px] h-[120px] object-contain object-center bg-lime-500 rounded-full" />
-                            <h4 className="text-[22px] text-[#1A1919] dark:text-white font-bold">{localStorage.getItem("username")}</h4>
+                            <h4 className="text-[22px] text-[#1A1919] dark:text-white font-bold">{userData?.full_name}</h4>
                         </div>
-                        <Link to="/createblog" className="mb-5 min-h-[36px] w-[138px] font-semibold text-[13px] text-[#1A1919] dark:text-white border border-[#1A1919] dark:border-white rounded-[7px] flex items-center justify-center">Новая статья</Link>
+                        {
+                            id === my_id ? <Link to="/createblog" className="mb-5 min-h-[36px] w-[138px] font-semibold text-[13px] text-[#1A1919] dark:text-white border border-[#1A1919] dark:border-white rounded-[7px] flex items-center justify-center">Новая статья</Link>
+                            : "follow"
+                        }
+                        
                         <ul className="flex items-center gap-x-5 text-[15px] text-[#949494] mb-5">
                             <li>
                                 <span className="text-[#1A1919] me-[2px]">{userData?.followers?.length}</span> подписчиков
@@ -83,7 +86,7 @@ const index = () => {
                           
                             {
                                 userData?.blog?.map((item)=> {
-                                    return <CardProfile key={item.id} case={item} getUserData={getUserData}/>
+                                    return <CardProfile key={item.id} case={item} getUserData={getUserData} userID ={id}/>
                                 })
                             }
                          

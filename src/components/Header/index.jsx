@@ -14,7 +14,7 @@ const index = () => {
 
     const navigate = useNavigate();
     const { pathname } = useLocation()
-
+    const id = localStorage.getItem("my_id");
     const toggleDarkMode = () => {
         setDark(!dark);
     }
@@ -26,7 +26,7 @@ const index = () => {
     }
 
     const getProfile = () => {
-        navigate("/profile");
+        navigate(`/profile/${id}`);
         setDropdown(!dropdown)
         document.body.style.overflowY = 'auto';
     }

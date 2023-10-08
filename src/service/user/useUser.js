@@ -15,6 +15,7 @@ const useUser = {
     register: (data) => api.post("/user/signup", data),
     getUser: (id) => api.get(`/user/${id}`),
     updateUser: (id,data) => api.patch(`/user/${id}`, data, {headers}),
+    followToUser: (data) => api.post(`/follow`, data, {headers})
 }
 
 export default useUser;

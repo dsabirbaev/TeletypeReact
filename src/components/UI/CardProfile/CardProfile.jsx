@@ -9,17 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 
-const CardProfile = ({ case: { title, createdAt, id }, getUserData }) => {
+const CardProfile = ({ case: { title, createdAt, id }, getUserData, userID }) => {
 
-    const {userData} = useSelector((data) => data)
+    const { userData } = useSelector((data) => data)
     const dispatch = useDispatch();
+    const my_id = localStorage.getItem("my_id");
 
-   
     const deleteBlogPost = (id) => {
 
         useBlog.deleteBlog(id).then((res) => {
             getUserData();
-           
+
         }).catch((err) => {
             console.log(err.message)
         })
@@ -45,9 +45,9 @@ const CardProfile = ({ case: { title, createdAt, id }, getUserData }) => {
     const confirm = (id) => {
         deleteBlogPost(id)
         message.success('Блог удален!');
-     
+
     };
-    
+
 
     return (
 
@@ -61,22 +61,26 @@ const CardProfile = ({ case: { title, createdAt, id }, getUserData }) => {
                 </p>
             </div>
 
+            {
+                userID === my_id ? 
+                <div className="flex items-center gap-x-2">
+                    <Link to={`/blog/edit/${id}`}>
+                        <Button className="text-blue-600 border-blue-600"> Изменить </Button>
+                    </Link>
 
-            <div className="flex items-center gap-x-2">
-                <Link to={`/blog/edit/${id}`}>
-                    <Button className="text-blue-600 border-blue-600"> Изменить </Button>
-                </Link>
-                
-                <Popconfirm
-                    title="Предупреждение!"
-                    description="Вы уверены, что хотите удалить эту задачу?"
-                    onConfirm={() => confirm(id)} 
-                    okText="Да"
-                    cancelText="Нет"
-                >
-                    <Button danger>Удалить</Button>
-                </Popconfirm>
-            </div>
+                    <Popconfirm
+                        title="Предупреждение!"
+                        description="Вы уверены, что хотите удалить эту задачу?"
+                        onConfirm={() => confirm(id)}
+                        okText="Да"
+                        cancelText="Нет"
+                    >
+                        <Button danger>Удалить</Button>
+                    </Popconfirm>
+                </div> : null
+            }
+
+
         </div>
 
     );
