@@ -1,33 +1,58 @@
 
 import user from "../../assets/images/user.png";
 import { Link, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUser from "../../service/user/useUser";
 import "./style.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_LOADER_PROFILE_OFF, SET_LOADER_PROFILE_ON, SET_USER_DATA } from "../../redux/action/actions";
 import CardProfile from "../../components/UI/CardProfile/CardProfile";
-
+import { Button } from "antd";
 const index = () => {
     const { userData, loadingProfile } = useSelector((data) => data);
     const dispatch = useDispatch();
     const my_id = localStorage.getItem("my_id");
     const { id } = useParams();
-  
+
+    const [isFollow, setIsFollow] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
     const getUserData = () => {
         useUser.getUser(id).then((res) => {
-            
+
             dispatch(SET_USER_DATA(res.data))
             dispatch(SET_LOADER_PROFILE_OFF())
+        })
+    }
+
+
+
+    const follow = () => {
+        const followID = {
+            following_id: id
+        }
+        setIsLoading(true);
+        useUser.followToUser(followID).then((res) => {
+            res.data && setIsLoading(false);
+        }).catch((err) => {
+            setIsLoading(false);
         })
     }
 
     useEffect(() => {
         dispatch(SET_LOADER_PROFILE_ON());
         getUserData();
-        document.title = `Profile | ${localStorage.getItem("username")}`
-    }, [])
-    
+
+        useUser.getUser(my_id).then((res) => {
+            res.data.followings.find((v) =>
+                v.following.id === id ? setIsFollow(true) : setIsFollow(false)
+            );
+
+        })
+    }, [id])
+
+    document.title = `Profile | ${userData?.full_name}`
+
     if (loadingProfile) {
         return <div className="loader-single-blog w-screen h-screen bg-white fixed z-40 top-0 left-0 flex items-center justify-center">
             <svg viewBox="25 25 50 50">
@@ -35,6 +60,7 @@ const index = () => {
             </svg>
         </div>
     }
+
     return (
         <section className="pt-[120px] pb-5">
             <div className="container">
@@ -46,9 +72,18 @@ const index = () => {
                         </div>
                         {
                             id === my_id ? <Link to="/createblog" className="mb-5 min-h-[36px] w-[138px] font-semibold text-[13px] text-[#1A1919] dark:text-white border border-[#1A1919] dark:border-white rounded-[7px] flex items-center justify-center">Новая статья</Link>
-                            : "follow"
+                                :
+                                <Button
+                                    disabled={isFollow === true}
+
+                                    loading={isLoading}
+                                    onClick={() => follow()}
+                                    className="mb-2 w-full bg-indigo-600 text-white dark:bg-gray-900 dark:text-white"
+                                >
+                                    {isFollow === true ? "Followed" : "Follow"}
+                                </Button>
                         }
-                        
+
                         <ul className="flex items-center gap-x-5 text-[15px] text-[#949494] mb-5">
                             <li>
                                 <span className="text-[#1A1919] me-[2px]">{userData?.followers?.length}</span> подписчиков
@@ -83,13 +118,13 @@ const index = () => {
                         </div>
 
                         <div className="flex flex-col gap-y-2">
-                          
+
                             {
-                                userData?.blog?.map((item)=> {
-                                    return <CardProfile key={item.id} case={item} getUserData={getUserData} userID ={id}/>
+                                userData?.blog?.map((item) => {
+                                    return <CardProfile key={item.id} case={item} getUserData={getUserData} userID={id} />
                                 })
                             }
-                         
+
                         </div>
                     </div>
                 </div>
